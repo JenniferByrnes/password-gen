@@ -7,6 +7,11 @@ var newPassword = {
   numeric: false,
 };
 
+const letters = "ABCDEFGHOJKLMNOPQRSTUVWXYZ";
+const numbers = "0123456789";
+const symbols = "!@#$%^&*()";
+var passwordChars = "";
+
 var getPasswordLength = function() {
   // ask player for desired password length
   var passwordLength = window.prompt('How long does your password need to be?  Please enter a number between 8 and 126');
@@ -33,8 +38,40 @@ var getDesiredChars = function() {
   newPassword.lowercase = window.confirm("Should your password use 'lowercase' letters?");
   newPassword.numeric = window.confirm("Should your password use 'Numeric' characters?");
   newPassword.specialChar = window.confirm("Should your password use 'Special' characters?");
- 
+
+  if (newPassword.uppercase) {
+    passwordChars = letters;
+    console.log("password chars = " + passwordChars);
+  }
+  if (newPassword.lowercase) {
+    passwordChars = passwordChars + letters.toLowerCase();
+    console.log("password chars = " + passwordChars);
+  }
+  if (newPassword.numeric) {
+    passwordChars = passwordChars + numbers;
+    console.log("password chars = " + passwordChars);
+  }
+  if (newPassword.specialChar) {
+    passwordChars = passwordChars + symbols;
+    console.log("password chars = " + passwordChars);
+  }
+  if (!passwordChars) {
+    window.alert("You need to have at least one acceptable type of character for your new password. Please try again.");
+    getDesiredChars();
+  }
+}
+
+// Copied - need to study and modify
+/*const generatePassword = (length, characters) => {
+  let password = "";
+  for (let i = 0; i < length; i++) {
+    password += characters.charAt(
+      Math.floor(Math.random() * totalchar.length)
+    );
+  }
+  return password;
 };
+*/
 
 
 function generatePassword() {
