@@ -1,79 +1,69 @@
-// Assignment code here
+// Declarations
 var newPassword = {
   length: 0,
   uppercase: false,
   lowercase: false,
   specialChar: false,
   numeric: false,
+  password: ""
 };
 
+// Variables needed to build total allowed characters.
 const letters = "ABCDEFGHOJKLMNOPQRSTUVWXYZ";
 const numbers = "0123456789";
 const symbols = "!@#$%^&*()";
 var passwordChars = "";
 
+// Function to get the desired password length
 var getPasswordLength = function() {
   // ask player for desired password length
   var passwordLength = window.prompt('How long does your password need to be?  Please enter a number between 8 and 126');
   
   // convert answer from prompt to an actual number
   passwordLength = parseInt(passwordLength);
-  console.log("Before IF passwordLength = " + passwordLength);
+  
   // validate desired password length
   if ((passwordLength >= 8) && (passwordLength <= 128)) {
 
-  console.log("Good passwordLength = " + passwordLength);
-  newPassword.length = passwordLength;
+    // Password length is valid - keep it
+    newPassword.length = passwordLength;
 
   } else {
-    console.log("BAD passwordLength = " + passwordLength);
+    // Password length is invalid
     window.alert("You need to provide a valid length. Please try again.");
-    // use return to call it again and stop the rest of this function from running
+    // restart function
     getPasswordLength();
   }
 };
 
+// Ask user for acceptable character types for the password
 var getDesiredChars = function() {
-  newPassword.uppercase = window.confirm("Should your password use 'UPPPECASE' letters?");
+  newPassword.uppercase = window.confirm("Should your password use 'UPPERCASE' letters?");
   newPassword.lowercase = window.confirm("Should your password use 'lowercase' letters?");
   newPassword.numeric = window.confirm("Should your password use 'Numeric' characters?");
   newPassword.specialChar = window.confirm("Should your password use 'Special' characters?");
 
+  // For each desired character type, add it to the passwordChars string
   if (newPassword.uppercase) {
     passwordChars = letters;
-    console.log("password chars = " + passwordChars);
   }
   if (newPassword.lowercase) {
-    passwordChars = passwordChars + letters.toLowerCase();
-    console.log("password chars = " + passwordChars);
+    passwordChars += letters.toLowerCase();
   }
   if (newPassword.numeric) {
-    passwordChars = passwordChars + numbers;
-    console.log("password chars = " + passwordChars);
+    passwordChars += numbers;
   }
   if (newPassword.specialChar) {
-    passwordChars = passwordChars + symbols;
-    console.log("password chars = " + passwordChars);
+    passwordChars += symbols;
   }
+  // If no character types were requested, try again
   if (!passwordChars) {
     window.alert("You need to have at least one acceptable type of character for your new password. Please try again.");
     getDesiredChars();
   }
 }
 
-// Copied - need to study and modify
-/*const generatePassword = (length, characters) => {
-  let password = "";
-  for (let i = 0; i < length; i++) {
-    password += characters.charAt(
-      Math.floor(Math.random() * totalchar.length)
-    );
-  }
-  return password;
-};
-*/
-
-
+// This is the main function to generate the password.
 function generatePassword() {
   // Declare variables
   
@@ -82,19 +72,25 @@ function generatePassword() {
   // The following retuns "undefined" if bad answers are given first.
   // newPassword.length = getPasswordLength();
   // This call works
+
+  // call function to get password length
   getPasswordLength();
-  console.log("Complete new.password.length = " + newPassword.length);
 
   // Get desired acceptable characters
   getDesiredChars();
-  // Loop through character sets to build password
 
-  // function to get password length
-  
+  // Loop through acceptable character string to build password
+  let password = "";
+  for (let i = 0; i < newPassword.length; i++) {
+    newPassword.password += passwordChars.charAt(
+      Math.floor(Math.random() * passwordChars.length));
+  }
 
-  return "password";
+  // Reurn to the user with the new password
+  return newPassword.password;
 }
 
+// Starter code is below
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
 
