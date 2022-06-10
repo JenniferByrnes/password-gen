@@ -10,7 +10,7 @@ This code generates passwords based on user criteria.
 * JavaScript
 
 ## Website
-https://jenniferbyrnes.github.io/portfolio
+https://jenniferbyrnes.github.io/password-gen/
 
 ## Contribution
 Crafted with ❤️ by Jennifer Byrnes
