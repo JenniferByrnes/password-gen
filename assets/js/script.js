@@ -8,6 +8,8 @@ var newPassword = {
   password: ""
 };
 
+var passwordText = document.querySelector("#password");
+
 // Variables needed to build total allowed characters.
 const letters = "ABCDEFGHOJKLMNOPQRSTUVWXYZ";
 const numbers = "0123456789";
@@ -16,6 +18,7 @@ var passwordChars = "";
 
 // Function to get the desired password length
 var getPasswordLength = function() {
+  
   // ask player for desired password length
   var passwordLength = window.prompt('How long does your password need to be?  Please enter a number between 8 and 126');
   
@@ -65,6 +68,7 @@ var getDesiredChars = function() {
 
 // This is the main function to generate the password.
 function generatePassword() {
+
   // Declare variables
   
   // Get desired password length 
@@ -80,13 +84,15 @@ function generatePassword() {
   getDesiredChars();
 
   // Loop through acceptable character string to build password
+
+
   let password = "";
   for (let i = 0; i < newPassword.length; i++) {
     newPassword.password += passwordChars.charAt(
       Math.floor(Math.random() * passwordChars.length));
   }
-
   // Reurn to the user with the new password
+  
   return newPassword.password;
 }
 
@@ -94,14 +100,25 @@ function generatePassword() {
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
 
+
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-
+ 
   passwordText.value = password;
+}
 
+function resetPassword() {
+  newPassword.length = 0
+  newPassword.uppercase = false
+  newPassword.lowercase = false
+  newPassword.specialChar = false
+  newPassword.numeric = false
+  newPassword.password = "";
 }
 
 // Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+generateBtn.onclick = function() {
+  resetPassword();
+  writePassword();
+}
