@@ -80,11 +80,7 @@ function generatePassword() {
   } 
   // End getDesiredChars()
 
-
-  // The following retuns "undefined" if bad answers are given first.
-  // newPassword.length = getPasswordLength();
-  // This call works
-  // get password length
+  // Get password length and validate it
   getPasswordLength();
 
   // Get desired acceptable characters
