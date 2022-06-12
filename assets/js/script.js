@@ -1,11 +1,9 @@
-  // DO NOT PROMOTE!!!! //
-  
-  // Declarations
-  /* This is the main function to generate the password.
-    First it called a function to get the desired password length
-    Then is calls a function to get the desired character sets into one string
-    Then it loops thrrough the character set string to build the password*/
+
 function generatePassword() {
+/* This is the main function to generate the password.
+    First it calls a function to get the desired password length
+    Then is calls a function to get the desired character sets into one string
+    Then it loops thrrough the character set string to build the password */
 
   // Declare variables
   var newPassword = {
@@ -93,7 +91,6 @@ function generatePassword() {
   getDesiredChars();
 
   // Loop through acceptable character string to build password
-  newPassword.password = "";
   for (let i = 0; i < newPassword.length; i++) {
     newPassword.password += passwordChars.charAt(
       Math.floor(Math.random() * passwordChars.length));
@@ -119,5 +116,3 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-
-// DO NOT PROMOTE!!!! //
