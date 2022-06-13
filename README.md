@@ -1,4 +1,4 @@
-# Password Generator Starter Code
+# Password Generator
 A password generator created from given starter code.
 
 ## Purpose
