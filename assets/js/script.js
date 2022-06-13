@@ -11,8 +11,6 @@ function generatePassword() {
   password: ""
   };
 
-  var passwordChars;
-
   // Function to get the desired password length
   var getPasswordLength = function() {
     // ask player for desired password length
@@ -46,6 +44,9 @@ function generatePassword() {
       numeric: false
     };
 
+    // Set passwordChars
+    var passwordChars = "";
+
     // Variables needed to build total allowed characters.
     const letters = "ABCDEFGHOJKLMNOPQRSTUVWXYZ";
     const numbers = "0123456789";
@@ -55,9 +56,6 @@ function generatePassword() {
     newPassword.lowercase = window.confirm("Should your password use 'lowercase' letters?");
     newPassword.numeric = window.confirm("Should your password use 'Numeric' characters?");
     newPassword.specialChar = window.confirm("Should your password use 'Special' characters?");
-
-    // Set/Reset passwordChars
-    passwordChars = "";
 
     // For each desired character type, add it to the passwordChars string
     if (newPassword.uppercase) {
@@ -75,21 +73,23 @@ function generatePassword() {
     // If no character types were requested, try again
     if (!passwordChars) {
       window.alert("You need to have at least one acceptable type of character for your new password. Please try again.");
-      getDesiredChars();
+      passwordChars = getDesiredChars();
     }
+    return passwordChars;
   } 
+  
   // End getDesiredChars()
 
   // Get password length and validate it
   getPasswordLength();
 
   // Get desired acceptable characters
-  getDesiredChars();
+  var passwordDesiredChars = getDesiredChars();
 
   // Loop through acceptable character string to build password
   for (let i = 0; i < newPassword.length; i++) {
-    newPassword.password += passwordChars.charAt(
-      Math.floor(Math.random() * passwordChars.length));
+    newPassword.password += passwordDesiredChars.charAt(
+      Math.floor(Math.random() * passwordDesiredChars.length));
   }
 
   // Reurn to the user with the new password
